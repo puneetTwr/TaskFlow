@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard";
 import Signup from "./Pages/Signup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./Components/Navbar";
+import { UserProvider } from "./Contexts/UserProvider";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -25,10 +26,10 @@ const App = () => {
     },
   ]);
   return (
-    <>
+    <UserProvider>
       <NavigationBar />
       <RouterProvider router={router} />
-    </>
+    </UserProvider>
   );
 };
 

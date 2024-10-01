@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getCurrentUser } from "../Services/user-services";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../Contexts/UserProvider";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useUser();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -22,6 +23,9 @@ const Dashboard = () => {
     fetchUser();
   }, []);
 
+  if(!user) {
+    navigate("/login");
+  }
   if (loading) {
     return <div>Loading...</div>;
   }

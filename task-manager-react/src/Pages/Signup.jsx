@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { createUser } from "../Services/user-services";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../Contexts/UserProvider";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const { setUser } = useUser();
 
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const Signup = () => {
       const response = await createUser({ username, password, name, email });
 
       if (response && response.success) {
-        console.log(response);
+        setUser(response.data.data);        
         navigate("/dashboard");
         setUsername("");
         setPassword("");
