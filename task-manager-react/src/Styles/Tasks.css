@@ -1,0 +1,25 @@
+.outer {
+  /* border: 1px solid red; */
+  color: rgb(58, 58, 58);
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  user-select: none;
+}
+
+.inner {
+  align-items: center;
+  /* border: 1px solid blue; */
+}
+
+.inner div {
+  margin: 5px;
+}
+
+.taskOptions {
+  width: 8rem;
+}
+
+.taskOptions button {
+  width: 6rem;
+}

@@ -1,55 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import taskFlowLogo from "../assets/task-flow-logo.png";
 import { useUser } from "../Contexts/UserProvider";
+import '../Styles/Navbar.css';
 
 function NavigationBar() {
   const { user, setUser } = useUser();
 
-  function handleLogout() {
+  const handleLogout = () => {
     localStorage.removeItem("jwtToken");
     setUser(null);
-  }
-  function handleLogin(e) {
+  };
+
+  const handleLogin = (e) => {
     e.preventDefault();
     window.location.href = "/login";
-  }
+  };
+
   return (
-    <Navbar className="bg-body-tertiary">
-      <Container fluid className="mx-5">
-        <Navbar.Brand href="#home" className="fs-2">
+    <Navbar expand="lg" className="custom-navbar shadow-sm" fixed="top">
+      <Container fluid className="mx-4">
+        <Navbar.Brand href="/" className="d-flex align-items-center">
           <img
             alt=""
             src={taskFlowLogo}
-            width="50"
-            height="50"
-            className="d-inline-block align-top"
+            width="40"
+            height="40"
+            className="d-inline-block align-top me-2"
           />
-          Task Flow 
+          <span className="fs-3 task-flow">Task Flow</span>
         </Navbar.Brand>
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll" className="justify-content-end">
           {user ? (
             <>
-              <Navbar.Text>
-                Signed in as: <a href="#login">{user.username}</a>
+              <Navbar.Text className="text-muted me-3">
+                Signed in as:{" "}
+                <a href="#login" className="text-primary fs-4">
+                  {user.username}
+                </a>
               </Navbar.Text>
               <button
                 type="button"
-                className="btn btn-dark mx-2"
+                className="btn btn-outline-danger"
                 onClick={handleLogout}
               >
-                Logout ?
+                Logout
               </button>
             </>
           ) : (
             <>
               <button
                 type="button"
-                className="btn btn-dark mx-2"
+                className="btn btn-outline-primary"
                 onClick={handleLogin}
               >
-                Login ?
+                Login
               </button>
             </>
           )}

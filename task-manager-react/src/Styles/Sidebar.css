@@ -1,0 +1,29 @@
+/* src/Components/Sidebar.css */
+
+.sidebar {
+  position: sticky; /* Fixes the sidebar in place */
+  top: 0;
+  bottom: 0; /* Aligns it to the top */
+  left: 0; /* Aligns it to the left */
+  min-width: 250px; /* Minimum width of the sidebar */
+  height: 100vh; /* Full height of the viewport */
+  background: #282830; /* Background color */
+  color: #ffffff; /* Text color */
+  overflow: hidden; /* Prevents scrolling */
+  padding: 20px; /* Padding for the sidebar */
+}
+
+.sidebar h4 {
+  color: #ffffff; /* Header color */
+}
+
+.sidebar-link {
+  color: #ffffff; /* Default link color */
+  transition: color 0.3s ease, background 0.3s ease; /* Smooth transition */
+}
+
+.sidebar-link:hover {
+  color: #f8f9fa; /* Change text color on hover */
+  background: #495057; /* Change background color on hover */
+  border-radius: 4px; /* Optional: add slight rounding to corners */
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUser } from "../Services/user-services";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../Contexts/UserProvider";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ const Signup = () => {
       const response = await createUser({ username, password, name, email });
 
       if (response && response.success) {
-        setUser(response.data.data);        
+        setUser(response.data.data);
         navigate("/dashboard");
         setUsername("");
         setPassword("");
@@ -34,60 +35,72 @@ const Signup = () => {
   };
 
   return (
-    <div className="loginPage">
-      <div className="login">
-        <h1>Sign up</h1>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+    <Container className="signupPage mt-5">
+      <Row className="justify-content-md-center">
+        <Col md={6}>
+          <div className="signup p-4 border rounded">
+            <h1 className="text-center mb-4">Sign Up</h1>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="name">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                  required
+                />
+              </Form.Group>
 
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                />
+              </Form.Group>
 
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoComplete="off"
-          />
+              <Form.Group className="mb-3" controlId="username">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your username"
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="off"
-          />
+              <Form.Group className="mb-3" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
 
-          <button type="submit">Sign up</button>
-        </form>
-      </div>
-      <p>Or</p>
-      <h2 className="signupLink">
-        <Link to="/login">Login</Link>
-      </h2>
-    </div>
+              <Button variant="primary" type="submit" className="w-100">
+                Sign Up
+              </Button>
+            </Form>
+          </div>
+          <div className="text-center mt-3">
+            <p>Or</p>
+            <h2 className="loginLink">
+              <Link to="/login">Login</Link>
+            </h2>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

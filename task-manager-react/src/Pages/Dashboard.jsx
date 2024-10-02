@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getCurrentUser } from "../Services/user-services";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../Contexts/UserProvider";
+import "../Styles/Dashboard.css";
+import TaskInput from "../Components/TaskInput";
+import { Container, Form, InputGroup, Button, DropdownButton, Dropdown } from "react-bootstrap";
 
 const Dashboard = () => {
   const { user, setUser } = useUser();
@@ -23,7 +26,7 @@ const Dashboard = () => {
     fetchUser();
   }, []);
 
-  if(!user) {
+  if (!user) {
     navigate("/login");
   }
   if (loading) {
@@ -42,32 +45,10 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4">User Dashboard</h1>
-      <div className="card">
-        <div className="card-header">
-          <h5>User Details</h5>
-        </div>
-        <div className="card-body">
-          <div className="row">
-            <div className="col-md-6">
-              <h6 className="font-weight-bold">Name:</h6>
-              <p>{user?.name}</p>
-            </div>
-            <div className="col-md-6">
-              <h6 className="font-weight-bold">Username:</h6>
-              <p>{user?.username}</p>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <h6 className="font-weight-bold">Email:</h6>
-              <p>{user?.email}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container className="dashBoard">
+      <h1 className="mb-4">Enter a Task</h1>
+      <TaskInput />
+    </Container>
   );
 };
 

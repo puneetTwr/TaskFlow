@@ -1,0 +1,21 @@
+.custom-navbar {
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.custom-navbar *{
+  color: #ffffff !important;
+}
+
+.task-flow {
+  color: #ffffff;
+}
+.custom-navbar .nav-link {
+  color: #ffffff;
+}
+
+.custom-navbar .btn {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+

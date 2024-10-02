@@ -1,7 +1,7 @@
-const User = require("../../models/User");
-const getAllUsersUsecase = require("../../UseCases/Users/get-all-users");
-const createUserUsecase = require("../../UseCases/Users/create-user");
-const authenticateUserUsecase = require("../../UseCases/Users/authenticate-user");
+const User = require("../models/User");
+const getAllUsersUsecase = require("../UseCases/Users/get-all-users");
+const createUserUsecase = require("../UseCases/Users/create-user");
+const authenticateUserUsecase = require("../UseCases/Users/authenticate-user");
 const jwt = require("jsonwebtoken");
 
 const getAllUsers = async (req, res) => {

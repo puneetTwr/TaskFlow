@@ -6,23 +6,35 @@ import Signup from "./Pages/Signup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./Components/Navbar";
 import { UserProvider } from "./Contexts/UserProvider";
+import ErrorPage from "./Pages/ErrorPage";
+import DashboardLayout from "./Pages/DashboardLayout";
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/login",
       element: <Login />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/signup",
       element: <Signup />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/dashboard",
-      element: <Dashboard />,
+      element: <DashboardLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "",
+          element: <Dashboard />,
+        },
+      ],
     },
   ]);
   return (
