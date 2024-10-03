@@ -52,7 +52,19 @@ const MyTasks = () => {
     }
   }, [user]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getTasks = async () => {
+      try {
+        const currentTasks = await getAllTasks();
+        setAllTasks(currentTasks);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+
+    getTasks();
+  }, []);
+
   return (
     <Container fluid className="dashboardPage">
       <h1>My Tasks</h1>
