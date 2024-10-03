@@ -8,35 +8,36 @@ import NavigationBar from "./Components/Navbar";
 import { UserProvider } from "./Contexts/UserProvider";
 import ErrorPage from "./Pages/ErrorPage";
 import DashboardLayout from "./Pages/DashboardLayout";
+import router from "./router/router";
 const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/signup",
-      element: <Signup />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/dashboard",
-      element: <DashboardLayout />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: "",
-          element: <Dashboard />,
-        },
-      ],
-    },
-  ]);
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <Home />,
+  //     errorElement: <ErrorPage />,
+  //   },
+  //   {
+  //     path: "/login",
+  //     element: <Login />,
+  //     errorElement: <ErrorPage />,
+  //   },
+  //   {
+  //     path: "/signup",
+  //     element: <Signup />,
+  //     errorElement: <ErrorPage />,
+  //   },
+  //   {
+  //     path: "/dashboard",
+  //     element: <DashboardLayout />,
+  //     errorElement: <ErrorPage />,
+  //     children: [
+  //       {
+  //         path: "",
+  //         element: <Dashboard />,
+  //       },
+  //     ],
+  //   },
+  // ]);
   return (
     <UserProvider>
       <NavigationBar />

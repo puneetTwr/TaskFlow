@@ -19,10 +19,7 @@ const Sidebar = () => {
         <NavLink to="/dashboard" className="nav-link sidebar-link">
           Dashboard
         </NavLink>
-        <NavLink to="/tasks/all" className="nav-link sidebar-link">
-          All Tasks
-        </NavLink>
-        <NavLink to="/tasks/my" className="nav-link sidebar-link">
+        <NavLink to="/dashboard/myTasks" className="nav-link sidebar-link">
           My Tasks
         </NavLink>
         <NavLink to="/tasks/completed" className="nav-link sidebar-link">

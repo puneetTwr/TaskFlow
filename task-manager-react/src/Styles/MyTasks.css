@@ -1,0 +1,62 @@
+.dashboardPage {
+  padding: 20px;
+  padding-top: 5rem;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.taskTitle {
+  /* border: 1px solid rgb(4, 0, 255); */
+  display: flex;
+  height: auto;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.taskTitle h3 {
+  height: 100%;
+  margin: 0;
+}
+.taskTitle * {
+  /* border: 1px solid red; */
+}
+
+.checkTask {
+  position: relative; /* Required for absolute positioning of child elements */
+}
+
+.circle-icon {
+  font-size: 2rem; /* Set size for the circle icon */
+}
+
+.check-icon {
+  font-size: 2rem; /* Set size for the check icon */
+  position: absolute; /* Position it on top of the circle icon */
+  top: 0;
+  left: 0;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.2s; /* Smooth transition for opacity */
+}
+
+.checkTask:hover .check-icon {
+  opacity: 1; /* Show check icon on hover */
+}
+
+.check-icon-completed {
+  font-size: 2rem; /* Set size for the check icon */
+  position: relative; /* Position it on top of the circle icon */
+  top: 0;
+  left: 0;
+  opacity: 1; /* Initially visible */
+  transition: opacity 0.5s; /* Smooth transition for opacity */
+}
+/* 
+.checkTask:hover .circle-icon {
+  opacity: 0; 
+} */
+
+.strikethrough {
+  text-decoration: line-through; /* Add line-through decoration */
+  color: rgb(32, 32, 32); /* Optionally change color to indicate completion */
+  transition: text-decoration 1s ease, color 1s ease;
+}

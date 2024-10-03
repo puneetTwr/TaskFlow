@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   InputGroup,
   Form,
@@ -6,10 +6,16 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { createTask } from "../Services/task-service";
-import "../Styles/Tasks.css"
+import { createTask, updateTask } from "../Services/task-service";
+import "../Styles/Tasks.css";
 
-const TaskInput = () => {
+const TaskInput = ({
+  setRecentTask,
+  setShowRecentTask,
+  editTask,
+  editMode,
+  setEditMode,
+}) => {
   const initialTaskData = {
     title: "",
     description: "",
@@ -20,7 +26,9 @@ const TaskInput = () => {
     priority: "low",
   };
 
-  const [taskData, setTaskData] = useState(initialTaskData);
+  const [taskData, setTaskData] = useState(
+    editMode ? editTask : initialTaskData
+  );
   const [showDescription, setShowDescription] = useState(false);
 
   const resetForm = () => {
@@ -33,11 +41,23 @@ const TaskInput = () => {
     setTaskData({ ...taskData, [name]: value });
   };
 
-
   const handleAddTask = async () => {
     try {
-      await createTask(taskData);
+      if (!editMode) {
+        const newCreatedTask = await createTask(taskData);
+        setRecentTask(newCreatedTask);
+        console.log({ newCreatedTask });
+      }
+
+      if (editMode) {
+        const updatedTask = await updateTask(taskData);
+        setRecentTask(updatedTask);
+        setEditMode(false);
+        console.log({ updatedTask });
+      }
+
       resetForm();
+      setShowRecentTask(true);
     } catch (error) {
       console.error("Error adding task:", error);
     }
@@ -58,14 +78,21 @@ const TaskInput = () => {
     }
   };
 
+  useEffect(() => {
+    if (editMode) {
+      setTaskData(editTask);
+      setShowDescription(editTask?.description ? true : false);
+    }
+  }, [editTask, editMode]);
+
   return (
-    <div className="row mb-4">
+    <div className="row mb-4 taskInput">
       <InputGroup className="mb-3" size="lg">
         <Form.Control
           name="title"
           placeholder="Task Title"
           aria-label="Task Title"
-          value={taskData.title}
+          value={taskData.title ?? ""}
           onChange={handleInputChange}
         />
       </InputGroup>
@@ -170,7 +197,7 @@ const TaskInput = () => {
               <Form.Control
                 type="date"
                 name="dueDate"
-                value={taskData.dueDate}
+                value={taskData.dueDate ?? ""}
                 onChange={handleInputChange}
                 aria-label="Due Date"
                 className="taskOptions"
@@ -198,7 +225,7 @@ const TaskInput = () => {
             name="description"
             placeholder="Task Description"
             aria-label="Task Description"
-            value={taskData.description}
+            value={taskData.description ?? ""}
             onChange={handleInputChange}
           />
         </InputGroup>

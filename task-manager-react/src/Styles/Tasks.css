@@ -23,3 +23,10 @@
 .taskOptions button {
   width: 6rem;
 }
+
+.taskInput {
+}
+
+.progress {
+  height: 2px !important;
+}

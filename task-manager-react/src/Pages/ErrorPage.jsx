@@ -35,7 +35,7 @@ const ErrorPage = () => {
               <Button
                 variant="primary"
                 size="lg"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/dashboard")}
                 className="px-4"
               >
                 Go Home

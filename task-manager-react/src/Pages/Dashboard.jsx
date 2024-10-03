@@ -4,12 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../Contexts/UserProvider";
 import "../Styles/Dashboard.css";
 import TaskInput from "../Components/TaskInput";
-import { Container, Form, InputGroup, Button, DropdownButton, Dropdown } from "react-bootstrap";
+import RecentTask from "../Components/NewCreatedTask";
+import { Container } from "react-bootstrap";
 
 const Dashboard = () => {
   const { user, setUser } = useUser();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [recentTask, setRecentTask] = useState();
+  const [showRecentTask, setShowRecentTask] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,7 +51,8 @@ const Dashboard = () => {
   return (
     <Container className="dashBoard">
       <h1 className="mb-4">Enter a Task</h1>
-      <TaskInput />
+      <TaskInput setRecentTask={setRecentTask} setShowRecentTask={setShowRecentTask} editTask={recentTask} editMode={editMode} setEditMode={setEditMode}/>
+      {showRecentTask && <RecentTask task={recentTask}  setRecentTask={setRecentTask} setShowRecentTask={setShowRecentTask} setEditMode={setEditMode} editMode={editMode}/>}
     </Container>
   );
 };
