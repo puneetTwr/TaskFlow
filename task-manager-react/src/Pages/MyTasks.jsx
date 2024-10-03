@@ -1,51 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { getAllTasks } from "../Services/task-service";
 import { Container } from "react-bootstrap";
-import Badge from "@mui/material/Badge";
-import Nav from "react-bootstrap/Nav";
 import MyTasksList from "../Components/myTasks/MyTasksList";
 import Tabs from "../Components/Tabs";
+import { useNavigate } from "react-router-dom";
 import "../Styles/MyTasks.css";
+import { useAppContext } from "../Contexts/AppContext";
 
 const MyTasks = () => {
-  const [myTasks, setMyTasks] = useState([]);
-  const [activeKey, setActiveKey] = useState("pending");
-  const [pendingTaskCount, setPendingTaskCount] = useState(0);
-  const [completedTaskCount, setCompletedTaskCount] = useState(0);
+  const [selectedTab, setSelectedTab] = useState("pending");
+  // const [pendingTaskCount, setPendingTaskCount] = useState(0);
+  // const [completedTaskCount, setCompletedTaskCount] = useState(0);
+  const [pendingTasks, setPendingTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const { user, allTasks, setAllTasks } = useAppContext();
+  const navigate = useNavigate();
   const handleSelect = (key) => {
-    setActiveKey(key);
+    setSelectedTab(key);
   };
-  const getPendingTaskCount = () => {
-    return myTasks.filter((task) => task.status === "pending").length;
+  const getPendingTasks = (tasks) => {
+    return tasks
+      .filter((task) => task.status === "pending")
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
-  const getCompletedTaskCount = () => {
-    return myTasks.filter((task) => task.status === "completed").length;
+
+  const getCompletedTasks = (tasks) => {
+    return tasks
+      .filter((task) => task.status === "completed")
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const tasks = await getAllTasks();
-        const pendingTaskCount = getPendingTaskCount();
-        setPendingTaskCount(pendingTaskCount);
-        const completedTaskCount = getCompletedTaskCount();
-        setCompletedTaskCount(completedTaskCount);
-        setMyTasks(tasks);
+        const pendingTasks = getPendingTasks(tasks);
+        const completedTasks = getCompletedTasks(tasks);
+        setPendingTasks(pendingTasks);
+        setCompletedTasks(completedTasks);
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
     };
     fetchTasks();
-  }, [myTasks]);
+  }, [allTasks]);
 
   useEffect(() => {
-    console.log({ myTasks });
-  }, [myTasks]);
+    if (!user) {
+      console.log("user not found !!!");
+      navigate("/login");
+    }
+  }, [user]);
+
+  useEffect(() => {}, []);
   return (
     <Container fluid className="dashboardPage">
       <h1>My Tasks</h1>
-      <Tabs activeKey={activeKey} onSelect={handleSelect} pendingTaskCount={pendingTaskCount} completedTaskCount={completedTaskCount} />
-      <MyTasksList tasks={myTasks} />
+      <Tabs
+        selectedTab={selectedTab}
+        onSelect={handleSelect}
+        pendingTaskCount={pendingTasks.length}
+        completedTaskCount={completedTasks.length}
+      />
+      <MyTasksList
+        tasks={selectedTab === "pending" ? pendingTasks : completedTasks}
+      />
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createUser } from "../Services/user-services";
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../Contexts/UserProvider";
+import { useAppContext } from "../Contexts/AppContext";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const Signup = () => {
@@ -9,7 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const { setUser } = useUser();
+  const { setUser } = useAppContext();
 
   const navigate = useNavigate();
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getCurrentUser } from "../Services/user-services";
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../Contexts/UserProvider";
+import { useAppContext } from "../Contexts/AppContext";
 import "../Styles/Dashboard.css";
 import TaskInput from "../Components/TaskInput";
 import RecentTask from "../Components/NewCreatedTask";
 import { Container } from "react-bootstrap";
 
 const Dashboard = () => {
-  const { user, setUser } = useUser();
+  const { user, setUser } = useAppContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [recentTask, setRecentTask] = useState();
@@ -51,8 +51,22 @@ const Dashboard = () => {
   return (
     <Container className="dashBoard">
       <h1 className="mb-4">Enter a Task</h1>
-      <TaskInput setRecentTask={setRecentTask} setShowRecentTask={setShowRecentTask} editTask={recentTask} editMode={editMode} setEditMode={setEditMode}/>
-      {showRecentTask && <RecentTask task={recentTask}  setRecentTask={setRecentTask} setShowRecentTask={setShowRecentTask} setEditMode={setEditMode} editMode={editMode}/>}
+      <TaskInput
+        setRecentTask={setRecentTask}
+        setShowRecentTask={setShowRecentTask}
+        editTask={recentTask}
+        editMode={editMode}
+        setEditMode={setEditMode}
+      />
+      {showRecentTask && (
+        <RecentTask
+          task={recentTask}
+          setRecentTask={setRecentTask}
+          setShowRecentTask={setShowRecentTask}
+          setEditMode={setEditMode}
+          editMode={editMode}
+        />
+      )}
     </Container>
   );
 };

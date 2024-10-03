@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { authenticateUser, getCurrentUser } from "../Services/user-services";
-import { useUser } from "../Contexts/UserProvider";
+import { useAppContext } from "../Contexts/AppContext";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const Login = () => {
@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { setUser } = useAppContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

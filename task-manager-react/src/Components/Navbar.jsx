@@ -2,11 +2,11 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import taskFlowLogo from "../assets/task-flow-logo.png";
-import { useUser } from "../Contexts/UserProvider";
-import '../Styles/Navbar.css';
+import { useAppContext } from "../Contexts/AppContext";
+import "../Styles/Navbar.css";
 
 function NavigationBar() {
-  const { user, setUser } = useUser();
+  const { user, setUser } = useAppContext();
 
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");

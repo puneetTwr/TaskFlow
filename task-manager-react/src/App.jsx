@@ -5,7 +5,7 @@ import Dashboard from "./Pages/Dashboard";
 import Signup from "./Pages/Signup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./Components/Navbar";
-import { UserProvider } from "./Contexts/UserProvider";
+import { AppProvider } from "./Contexts/AppContext";
 import ErrorPage from "./Pages/ErrorPage";
 import DashboardLayout from "./Pages/DashboardLayout";
 import router from "./router/router";
@@ -39,10 +39,10 @@ const App = () => {
   //   },
   // ]);
   return (
-    <UserProvider>
+    <AppProvider>
       <NavigationBar />
       <RouterProvider router={router} />
-    </UserProvider>
+    </AppProvider>
   );
 };
 
