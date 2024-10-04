@@ -20,6 +20,23 @@ export const createTask = async (taskData) => {
   }
 };
 
+export const getAllTasks = async () => {
+  try {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) throw new Error("Unauthorized");
+    const response = await axios.get(`${API_URL}/tasks`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.data;
+  } catch (error) {
+    throw new Error(
+      error.response ? error.response.data.message : error.message
+    );
+  }
+};
+
 export const updateTask = async (taskData) => {
   try {
     const token = localStorage.getItem("jwtToken");
@@ -38,11 +55,11 @@ export const updateTask = async (taskData) => {
   }
 };
 
-export const getAllTasks = async () => {
+export const deleteTask = async (taskId) => {
   try {
     const token = localStorage.getItem("jwtToken");
     if (!token) throw new Error("Unauthorized");
-    const response = await axios.get(`${API_URL}/tasks`, {
+    const response = await axios.delete(`${API_URL}/tasks/${taskId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

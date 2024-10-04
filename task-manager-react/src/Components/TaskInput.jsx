@@ -46,14 +46,12 @@ const TaskInput = ({
       if (!editMode) {
         const newCreatedTask = await createTask(taskData);
         setRecentTask(newCreatedTask);
-        console.log({ newCreatedTask });
       }
 
       if (editMode) {
         const updatedTask = await updateTask(taskData);
         setRecentTask(updatedTask);
         setEditMode(false);
-        console.log({ updatedTask });
       }
 
       resetForm();

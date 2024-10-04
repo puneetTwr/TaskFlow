@@ -26,9 +26,9 @@ const RecentTask = ({
   };
 
   useEffect(() => {
-    // Fill the progress bar in 5 seconds
+    setProgress(0);
     const totalDuration = 5000; // 5 seconds
-    const intervalTime = 200; // 100 milliseconds
+    const intervalTime = 200;
     const incrementValue = (100 / totalDuration) * intervalTime; // Increment value per interval
 
     const interval = setInterval(() => {
@@ -42,8 +42,8 @@ const RecentTask = ({
       });
     }, intervalTime);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, [setRecentTask]);
+    return () => clearInterval(interval);
+  }, [task, setRecentTask]);
 
   return (
     <Card className="recent-task-card" style={{ borderColor: color }}>

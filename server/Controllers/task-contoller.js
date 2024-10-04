@@ -3,7 +3,7 @@ const Task = require("../models/Task");
 const createTaskUsecase = require("../UseCases/Tasks/create-task");
 const getAllTasksUsecase = require("../UseCases/Tasks/get-all-tasks");
 const updateTaskUsecase = require("../UseCases/Tasks/update-task");
-
+const deleteTaskUsecase = require("../UseCases/Tasks/delete-task");
 
 const createTask = async (req, res) => {
   try {
@@ -17,17 +17,17 @@ const createTask = async (req, res) => {
   }
 };
 
-const updateTask = async(req, res) => {
-  try{
+const updateTask = async (req, res) => {
+  try {
     res.status(201).json({
       message: "Task updated successfully",
       data: await updateTaskUsecase(req.body),
     });
-  }catch(err){
+  } catch (err) {
     console.log(err);
     res.status(400).json({ message: err.message });
   }
-}
+};
 const getAllTasks = async (req, res) => {
   try {
     const tasks = await getAllTasksUsecase(req.body.userId);
@@ -40,8 +40,20 @@ const getAllTasks = async (req, res) => {
   }
 };
 
+const deleteTask = async (req, res) => {
+  try {
+    res.status(201).json({
+      message: "Task deleted successfully",
+      data: await deleteTaskUsecase(req.params.taskId),
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   createTask,
   getAllTasks,
-  updateTask
+  updateTask,
+  deleteTask,
 };

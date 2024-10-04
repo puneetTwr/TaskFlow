@@ -7,3 +7,14 @@
 .dashboard-layout {
   background-color: #ffffff;
 }
+
+.add-task-icon {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover */
+}
+
+.add-task-icon:hover {
+  transform: scale(1.2); /* Enlarge the icon on hover */
+}

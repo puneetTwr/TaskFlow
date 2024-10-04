@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Badge from "@mui/material/Badge";
 import Nav from "react-bootstrap/Nav";
 import { Container } from "react-bootstrap";
+
 const Tabs = ({
-  activeKey,
+  selectedTab,
   onSelect,
   pendingTaskCount,
   completedTaskCount,
 }) => {
   return (
     <Container fluid className="mb-3">
-      <Nav variant="underline" activeKey={activeKey} onSelect={onSelect}>
+      <Nav variant="underline" activeKey={selectedTab} onSelect={onSelect}>
         <Nav.Item>
           <Nav.Link eventKey="pending" style={{ fontSize: "1.5rem" }}>
             <Badge color="secondary" badgeContent={pendingTaskCount}>

@@ -22,9 +22,6 @@ const Sidebar = () => {
         <NavLink to="/dashboard/myTasks" className="nav-link sidebar-link">
           My Tasks
         </NavLink>
-        <NavLink to="/tasks/completed" className="nav-link sidebar-link">
-          Completed Tasks
-        </NavLink>
         <NavLink to="/categories" className="nav-link sidebar-link">
           Categories
         </NavLink>

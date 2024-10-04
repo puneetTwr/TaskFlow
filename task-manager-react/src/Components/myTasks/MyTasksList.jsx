@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import TaskItem from "./TaskItem";
 import Modal from "react-bootstrap/Modal";
-
+import EditTaskModal from "./EditTaskModal";
+import DeleteTaskModal from "./DeleteTaskModal";
 const MyTasksList = ({ tasks }) => {
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+  const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+
   const [selectedTask, setSelectedTask] = useState(null);
 
   return (
@@ -18,17 +21,23 @@ const MyTasksList = ({ tasks }) => {
               task={task}
               setSelectedTask={setSelectedTask}
               setShowEditTaskModal={setShowEditTaskModal}
+              setShowDeleteTaskModal={setShowDeleteTaskModal}
             />
           ))}
         </ul>
       )}
 
-      <Modal
-        show={showEditTaskModal}
-        onHide={() => setShowEditTaskModal(false)}
-      >
-        Hellow
-      </Modal>
+      <EditTaskModal
+        showEditTaskModal={showEditTaskModal}
+        setShowEditTaskModal={setShowEditTaskModal}
+        taskToBeEdited={selectedTask}
+      />
+
+      <DeleteTaskModal
+        showDeleteTaskModal={showDeleteTaskModal}
+        setShowDeleteTaskModal={setShowDeleteTaskModal}
+        taskToBeDeleted={selectedTask}
+      />
     </div>
   );
 };

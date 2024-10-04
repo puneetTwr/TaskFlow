@@ -2,11 +2,21 @@
 import React, { useEffect, useState } from "react";
 import { Card, Container } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
-import { FaRegCircle, FaRegCheckCircle, FaCheckCircle } from "react-icons/fa";
+import {
+  FaRegCircle,
+  FaRegCheckCircle,
+  FaCheckCircle,
+  FaTrashAlt,
+} from "react-icons/fa";
 import { useAppContext } from "../../Contexts/AppContext";
 import { updateTask } from "../../Services/task-service";
 
-const TaskItem = ({ task, setShowEditTaskModal, setSelectedTask }) => {
+const TaskItem = ({
+  task,
+  setShowEditTaskModal,
+  setSelectedTask,
+  setShowDeleteTaskModal,
+}) => {
   const [isCompleted, setIsCompleted] = useState(false);
   const { allTasks, setAllTasks } = useAppContext();
 
@@ -14,19 +24,19 @@ const TaskItem = ({ task, setShowEditTaskModal, setSelectedTask }) => {
     setSelectedTask(task);
     setShowEditTaskModal(true);
   };
+  const deleteTask = () => {
+    setSelectedTask(task);
+    setShowDeleteTaskModal(true);
+  };
   const markAsCompleted = async (e) => {
     e.stopPropagation();
     try {
       const updatedTask = await updateTask({ ...task, status: "completed" });
-      console.log("updatedTask", updatedTask);
-      console.log({ allTasks });
       const taskIndex = allTasks.findIndex((t) => t._id === updatedTask._id);
-      console.log({ taskIndex });
       if (taskIndex !== -1) {
-        console.log("taskIndex fpimddpkapsdpask");
         const updatedTasks = [...allTasks];
         updatedTasks[taskIndex] = updatedTask;
-        console.log("settting the task now");
+
         setAllTasks(updatedTasks);
         setIsCompleted(true);
       }
@@ -60,7 +70,7 @@ const TaskItem = ({ task, setShowEditTaskModal, setSelectedTask }) => {
         className="mb-3 taskItem w-100 "
         style={{ borderLeft: `10px solid ${task.color || "grey"}` }}
       >
-        <Card.Body className="d-flex align-items-center">
+        <Card.Body className="d-flex align-items-center taskItem">
           <div className="flex-grow-1">
             <div className="taskTitle">
               <Card.Title
@@ -68,17 +78,7 @@ const TaskItem = ({ task, setShowEditTaskModal, setSelectedTask }) => {
                 className={isCompleted ? "strikethrough" : ""}
               >
                 {task.title}
-              </Card.Title>
-              {!isCompleted && (
-                <div className="editTask">
-                  <button
-                    onClick={editTask}
-                    className="btn btn-outline-primary btn-sm"
-                  >
-                    Edit <MdEdit />
-                  </button>
-                </div>
-              )}
+              </Card.Title>              
             </div>
 
             <div className="d-flex flex-row justify-content-between">
@@ -94,6 +94,26 @@ const TaskItem = ({ task, setShowEditTaskModal, setSelectedTask }) => {
                   {new Date(task.dueDate).toLocaleDateString()}
                 </div>
               )}
+            </div>
+          </div>
+          <div className="actionButtons">
+            {!isCompleted && (
+              <div className="editTask">
+                <button
+                  onClick={editTask}
+                  className="btn btn-outline-primary btn-sm"
+                >
+                  Edit <MdEdit />
+                </button>
+              </div>
+            )}
+            <div className="deleteTask">
+              <button
+                onClick={deleteTask}
+                className="btn btn-outline-danger btn-sm"
+              >
+                Delete <FaTrashAlt />
+              </button>
             </div>
           </div>
         </Card.Body>

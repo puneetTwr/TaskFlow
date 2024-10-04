@@ -15,8 +15,7 @@ export const getAllUsers = async () => {
 
 export const createUser = async (userData) => {
   try {
-    const response = await axios.post(`${API_URL}/users/signup`, userData);
-    console.log(response.data);
+    const response = await axios.post(`${API_URL}/users/signup`, userData);    
     localStorage.setItem("jwtToken", response.data.data.token);
     return { success: true, data: response.data };
   } catch (error) {

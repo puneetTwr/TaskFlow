@@ -30,3 +30,31 @@
 .progress {
   height: 2px !important;
 }
+
+.taskItem * {
+  /* border: 1px solid rgb(47, 0, 255); */
+}
+.actionButtons {
+  /* border: 1px solid rgb(47, 0, 255); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 15rem;
+}
+.actionButtons button {
+  font-size: medium;
+  height: 2.5rem;
+  width: 6rem;
+}
+
+.editTaskModal {
+  min-width: 40vw;
+}
+
+.deleteTaskModal .modal-header,
+.deleteTaskModal .modal-footer {
+  border: none;
+}
+.redBorder {
+  border: 1px solid red !important;
+}
